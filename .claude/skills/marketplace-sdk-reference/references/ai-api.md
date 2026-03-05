@@ -3,12 +3,12 @@
 ## Module Registration
 
 ```typescript
-import { createClient } from "@anthropic-ai/sitecore-marketplace-sdk-client";
-import { aiModule } from "@anthropic-ai/sitecore-marketplace-sdk-ai";
+import { ClientSDK } from "@sitecore-marketplace-sdk/client";
+import { AI } from "@sitecore-marketplace-sdk/ai";
 
-const client = createClient({
-  appId: process.env.NEXT_PUBLIC_SITECORE_APP_ID!,
-  modules: [aiModule()],
+const client = await ClientSDK.init({
+  target: window.parent,
+  modules: [AI],
 });
 ```
 
@@ -99,7 +99,7 @@ type BrandReviewContent =
 For full-stack (Auth0) apps:
 
 ```typescript
-import { experimental_createAIClient } from "@anthropic-ai/sitecore-marketplace-sdk-ai/server";
+import { experimental_createAIClient } from "@sitecore-marketplace-sdk/ai";
 
 // In a Next.js API route or Server Action
 const aiClient = await experimental_createAIClient({

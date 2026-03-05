@@ -1,14 +1,14 @@
 # Client Package API Reference
 
-## createClient(options)
+## ClientSDK.init(config)
 
 Creates and initializes the SDK client.
 
 ```typescript
-import { createClient } from "@anthropic-ai/sitecore-marketplace-sdk-client";
+import { ClientSDK } from "@sitecore-marketplace-sdk/client";
 
-const client = createClient({
-  appId: string;          // Required: App ID from Developer Portal
+const client = await ClientSDK.init({
+  target: window.parent,  // Required: target window (typically window.parent)
   modules?: Module[];     // Optional: Additional modules (XMC, AI)
 });
 ```

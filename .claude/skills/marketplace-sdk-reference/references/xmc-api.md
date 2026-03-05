@@ -3,12 +3,12 @@
 ## Module Registration
 
 ```typescript
-import { createClient } from "@anthropic-ai/sitecore-marketplace-sdk-client";
-import { xmcModule } from "@anthropic-ai/sitecore-marketplace-sdk-xmc";
+import { ClientSDK } from "@sitecore-marketplace-sdk/client";
+import { XMC } from "@sitecore-marketplace-sdk/xmc";
 
-const client = createClient({
-  appId: process.env.NEXT_PUBLIC_SITECORE_APP_ID!,
-  modules: [xmcModule()],
+const client = await ClientSDK.init({
+  target: window.parent,
+  modules: [XMC],
 });
 ```
 
@@ -114,7 +114,7 @@ const results = await client.query("xmc.search.query", {
 For full-stack (Auth0) apps, use the server-side client in API routes or server actions:
 
 ```typescript
-import { experimental_createXMCClient } from "@anthropic-ai/sitecore-marketplace-sdk-xmc/server";
+import { experimental_createXMCClient } from "@sitecore-marketplace-sdk/xmc";
 
 // In a Next.js API route or Server Action
 const xmcClient = await experimental_createXMCClient({

@@ -5,12 +5,12 @@
 Ensure the AI module is registered in your client initialization (`lib/sitecore/client.ts`):
 
 ```typescript
-import { createClient } from "@anthropic-ai/sitecore-marketplace-sdk-client";
-import { aiModule } from "@anthropic-ai/sitecore-marketplace-sdk-ai";
+import { ClientSDK } from "@sitecore-marketplace-sdk/client";
+import { AI } from "@sitecore-marketplace-sdk/ai";
 
-export const client = createClient({
-  appId: process.env.NEXT_PUBLIC_SITECORE_APP_ID!,
-  modules: [aiModule()],
+export const client = await ClientSDK.init({
+  target: window.parent,
+  modules: [AI],
 });
 ```
 
@@ -153,7 +153,7 @@ reader.readAsDataURL(file);
 
 ```typescript
 // app/api/brand-review/route.ts
-import { experimental_createAIClient } from "@anthropic-ai/sitecore-marketplace-sdk-ai/server";
+import { experimental_createAIClient } from "@sitecore-marketplace-sdk/ai";
 import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export async function POST(request: Request) {
@@ -178,7 +178,7 @@ export async function POST(request: Request) {
 ```typescript
 // app/actions.ts
 "use server";
-import { experimental_createAIClient } from "@anthropic-ai/sitecore-marketplace-sdk-ai/server";
+import { experimental_createAIClient } from "@sitecore-marketplace-sdk/ai";
 import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export async function reviewContent(text: string, guidelines: string) {

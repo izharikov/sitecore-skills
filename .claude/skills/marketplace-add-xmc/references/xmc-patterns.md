@@ -5,12 +5,12 @@
 Ensure the XMC module is registered in your client initialization (`lib/sitecore/client.ts`):
 
 ```typescript
-import { createClient } from "@anthropic-ai/sitecore-marketplace-sdk-client";
-import { xmcModule } from "@anthropic-ai/sitecore-marketplace-sdk-xmc";
+import { ClientSDK } from "@sitecore-marketplace-sdk/client";
+import { XMC } from "@sitecore-marketplace-sdk/xmc";
 
-export const client = createClient({
-  appId: process.env.NEXT_PUBLIC_SITECORE_APP_ID!,
-  modules: [xmcModule()],
+export const client = await ClientSDK.init({
+  target: window.parent,
+  modules: [XMC],
 });
 ```
 
@@ -175,7 +175,7 @@ const status = await client.query("xmc.agent.status", {
 ### API Route
 ```typescript
 // app/api/sites/route.ts
-import { experimental_createXMCClient } from "@anthropic-ai/sitecore-marketplace-sdk-xmc/server";
+import { experimental_createXMCClient } from "@sitecore-marketplace-sdk/xmc";
 import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export async function GET() {
@@ -193,7 +193,7 @@ export async function GET() {
 ```typescript
 // app/actions.ts
 "use server";
-import { experimental_createXMCClient } from "@anthropic-ai/sitecore-marketplace-sdk-xmc/server";
+import { experimental_createXMCClient } from "@sitecore-marketplace-sdk/xmc";
 import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export async function getSites() {
