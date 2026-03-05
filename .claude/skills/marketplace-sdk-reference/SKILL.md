@@ -43,16 +43,18 @@ const client = await ClientSDK.init({
 
 ### Common Patterns
 ```typescript
-// Query
-const result = await client.query("queryName", params);
+// Query — returns { data, unsubscribe? }
+const { data } = await client.query("queryName", params);
 
 // Mutation
-const result = await client.mutate("mutationName", params);
+const { data } = await client.mutate("mutationName", params);
 
-// Subscription
-const unsubscribe = client.subscribe("eventName", (data) => {
-  console.log(data);
+// Subscription — use query() with subscribe: true
+const { unsubscribe } = await client.query("queryName", {
+  subscribe: true,
+  onSuccess: (data) => console.log(data),
 });
+unsubscribe?.();
 ```
 
 ## Reference Files
